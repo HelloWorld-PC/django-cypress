@@ -6,11 +6,11 @@ and maintain consistency, please review and follow these guidelines.
 
 ## Local Installation
 1. You should have [Python 3](https://www.python.org/downloads/) and [venv](https://docs.python.org/3/library/venv.html) installed.
-2. Create an new venv
+2. Create a new virtual environment
 ```
 python -m venv .venv
 ```
-3. Activate the venv
+3. Activate the virtual environment
 ```
 source .venv/bin/activate
 ```
