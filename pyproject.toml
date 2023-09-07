@@ -1,3 +1,21 @@
 [build-system]
 requires = ["setuptools ~= 67.8", "wheel"]
 build-backend = "setuptools.build_meta"
+
+[tool.ruff]
+select = [
+    "F", # https://beta.ruff.rs/docs/rules/#pyflakes-f
+    "E", # https://beta.ruff.rs/docs/rules/#pycodestyle-e-w
+    "W", # https://beta.ruff.rs/docs/rules/#pycodestyle-e-w
+    "I", # https://beta.ruff.rs/docs/rules/#isort-i
+    "N", # https://beta.ruff.rs/docs/rules/#pep8-naming-n
+    "D", # https://beta.ruff.rs/docs/rules/#pydocstyle-d
+    "B", # https://beta.ruff.rs/docs/rules/#flake8-bugbear-b
+    "DJ", # https://beta.ruff.rs/docs/rules/#flake8-django-dj
+]
+ignore = [
+    "E501",  # line too long, handled by black
+    "D203", # conflict with D211
+    "D213", # conflict with D212
+]
+exclude = [".venv"]

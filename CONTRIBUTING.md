@@ -4,6 +4,21 @@ Thank you for considering contributing to this project! We appreciate your
 interest and efforts to improve the library. To ensure smooth collaboration 
 and maintain consistency, please review and follow these guidelines.
 
+## Local Installation
+1. You should have [Python 3](https://www.python.org/downloads/) and [venv](https://docs.python.org/3/library/venv.html) installed.
+2. Create a new virtual environment
+```
+python -m venv .venv
+```
+3. Activate the virtual environment
+```
+source .venv/bin/activate
+```
+4. Install the required dependencies
+```
+pip install -r requirements.txt
+```
+
 ## Commit Messages
 It's important to provide descriptive commit messages that tell a story. 
 We suggest following the guidelines outlined in the 
@@ -34,6 +49,16 @@ Here's the suggested workflow for contributing:
    - If the pull request addresses any existing issues, reference them using the `#issue_number` syntax in the description.
 6. Your pull request will be reviewed by the maintainers, and any feedback or changes required will be communicated to you.
 7. Once the pull request is approved and meets the necessary criteria, it will be merged into the main repository.
+
+## Coding Style
+
+To maintain a consistent coding style across the project, we use [Ruff](https://beta.ruff.rs/docs/) for code linting and [Black](https://black.readthedocs.io/en/stable/) for code 
+formatting. Before submitting any code changes, please make sure your code 
+adheres to these guidelines.
+
+All code should be formatted with 
+1. `ruff --fix src`
+2. `black src`
 
 ## Developer Certificate of Origin (DCO)
 
