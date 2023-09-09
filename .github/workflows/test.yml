@@ -17,7 +17,22 @@ jobs:
         run: pip install -r requirements-tests.txt
 
       - name: Lint
-        run: ruff src
+        run: ruff .
       
       - name: Format
-        run: black src --check
+        run: black . --check
+    
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: "3.11"
+
+      - name: Install django_cypress
+        run: pip install .
+
+      - name: Test
+        run: python run_tests.py

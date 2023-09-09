@@ -57,8 +57,126 @@ formatting. Before submitting any code changes, please make sure your code
 adheres to these guidelines.
 
 All code should be formatted with 
-1. `ruff --fix src`
-2. `black src`
+1. `ruff --fix .`
+2. `black .`
+
+## Testing
+
+Before submitting any code changes, it's important to ensure that your 
+code passes all the relevant tests. Follow these steps to run the tests:
+
+```
+python run_tests.py
+```
+
+## Creating a new Cypress command
+1. Create a new view at [`django_cypress/views.py`](./django_cypress/views.py) file. For example: `ManageView`.
+```python
+class ManageView(View):
+    """A view for running Django management commands via HTTP POST requests."""
+
+    def post(
+        self,
+        request: HttpRequest,
+    ) -> JsonResponse:
+        """Handle HTTP POST requests to execute Django management commands.
+
+        Args:
+        ----
+        request (HttpRequest): The HTTP request object containing the command to execute.
+
+        Returns:
+        -------
+        JsonResponse: A JSON response indicating the success of the command execution.
+        """
+        body = json.loads(request.body.decode("utf-8"))
+        command = body.get("command")
+        parameters = body.get("parameters")
+        management.call_command(
+            command,
+            *parameters,
+        )
+
+        return JsonResponse({"success": True})
+
+```
+2. Add a new URL entry at [`django_cypress/urls.py`](./django_cypress/urls.py) file.
+The URL should start with `__cypress__/` prefix.
+```python
+from .views import ManageView
+
+urlpatterns = [
+   ...
+   path("__cypress__/manage/", ManageView.as_view(), name="manage-view"),
+   ...
+]
+```
+3. Create a new command at [`django_cypress/stubs/cypress/support/commands.js`](./django_cypress/stubs/cypress/support/commands.js) file that will do a request to the Django view.
+```javascript
+Cypress.Commands.add('manage', (command, parameters = []) => {
+    return cy.csrfToken().then((token) => {
+        return cy.request({
+            method: 'POST',
+            url: '/__cypress__/manage/',
+            body: { command: command, parameters: parameters  },
+            log: false,
+            headers: {
+                "X-CSRFToken": token["body"]["token"]
+            }
+        });
+    });
+})
+```
+4. Add the types of the command at the [`example/cypress/support/index.d.ts`](./example/cypress/support/index.d.ts) file.
+```typescript
+/// <reference types="cypress" />
+
+declare namespace Cypress {
+    interface Chainable<Subject> {
+      ...
+      /**
+      * Run an Management command.
+      *
+      * @example
+      * cy.manage()
+      */
+      manage(command: string, parameters?: string[]): Chainable<any>;
+    }
+}
+```
+5. Add a test case of the command at [`tests/tests.py`](./tests/tests.py) file.
+```python
+class ManageViewTestCase(TestCase):
+    """Test case for the Manage view."""
+
+    def setUp(self) -> None:
+        """Set up the test case."""
+        self.client = Client()
+
+    def test_run_manage_command(self) -> None:
+        """Do an HTTP GET request to the ManageView.
+
+        First of all, create a dummy user. Then run the
+        manage.py flush command through the ManageView.
+        Finally, make sure that the HTTP Status Code of
+        the response is 200 and the database is empty.
+        """
+        path = reverse("manage-view")
+
+        User.objects.create(username="Testuser")
+
+        request_data = {"command": "flush", "parameters": ["--no-input"]}
+        content_type = "application/json"
+        response = self.client.post(path, request_data, content_type)
+
+        expected_count = 0
+        actual_count = User.objects.all().count()
+        self.assertEqual(expected_count, actual_count)
+
+        expected_status_code = HTTPStatus.OK
+        actual_status_code = response.status_code
+        self.assertEqual(expected_status_code, actual_status_code)
+```
 
 ## Developer Certificate of Origin (DCO)
 

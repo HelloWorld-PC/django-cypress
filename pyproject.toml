@@ -17,5 +17,6 @@ ignore = [
     "E501",  # line too long, handled by black
     "D203", # conflict with D211
     "D213", # conflict with D212
+    "D100", # most Django-related modules are obvious and not need specific documentation
 ]
 exclude = [".venv"]
