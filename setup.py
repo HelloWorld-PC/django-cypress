@@ -19,6 +19,9 @@ setup(
     license="MIT License",
     include_package_data=True,
     packages=find_packages(),
+    package_data={
+        "stubs": ["*"],
+    },
     requires=[
         "Django (>=3.2)",
     ],

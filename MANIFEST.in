@@ -1,0 +1,2 @@
+include django_cypress/stubs/*
+include django_cypress/stubs/cypress/**/*
