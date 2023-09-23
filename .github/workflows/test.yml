@@ -21,6 +21,9 @@ jobs:
       
       - name: Format
         run: black . --check
+
+      - name: Check the types
+        run: mypy .
     
   test:
     runs-on: ubuntu-latest
