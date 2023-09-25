@@ -60,6 +60,31 @@ All code should be formatted with
 1. `ruff --fix .`
 2. `black .`
 
+## Documentation
+The documentation for this project is located in the `docs` directory and is hosted at
+[django-cypress.helloworldpc.com](https://django-cypress.helloworldpc.com).
+[MkDocs](https://www.mkdocs.org/) is used as the framework and
+[Material](https://squidfunk.github.io/mkdocs-material/) as the theme.
+To view the documentation locally and contribute to it, follow these steps:
+1. Install the required documentation dependencies:
+```
+pip install -r requirements-docs.txt
+```
+2. Navigate to the `docs` directory:
+```
+cd docs
+```
+3. Start a local development server:
+```
+mkdocs serve --dev-addr localhost:3000
+```
+4. Open your web browser and visit [http://localhost:3000](http://localhost:3000) to
+access the local documentation.
+
+We encourage all contributors to keep the documentation up-to-date and comprehensive.
+If you find any errors or have suggestions for improvement, please consider contributing
+to the documentation alongside your code changes.
+
 ## Testing
 
 Before submitting any code changes, it's important to ensure that your 
@@ -176,6 +201,31 @@ class ManageViewTestCase(TestCase):
         expected_status_code = HTTPStatus.OK
         actual_status_code = response.status_code
         self.assertEqual(expected_status_code, actual_status_code)
+```
+6. Add documentation for your command by creating a new file `{command}.md` at [`./docs/docs/commands`](./docs/docs/commands/) directory. This file should use the following structure. View [`manage.md`](./docs/docs/commands/manage.md) example.
+
+```markdown
+# Command name
+
+Command Description
+
+## Syntax
+
+Command Syntax
+
+## Usage
+
+Command Usage
+
+## Arguments
+
+### > argument 1 (Type of the Argument)
+
+Description for the argument 1
+
+### > argument 2 (Type of the Argument)
+
+Description for the argument 2
 ```
 
 ## Developer Certificate of Origin (DCO)
