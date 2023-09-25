@@ -1,3 +1,4 @@
 -e .[all]
 -r requirements-tests.txt
 -r requirements-docs.txt
+-r requirements-publish.txt
