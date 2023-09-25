@@ -20,3 +20,19 @@ ignore = [
     "D100", # most Django-related modules are obvious and not need specific documentation
 ]
 exclude = [".venv"]
+
+[tool.mypy]
+plugins = ["mypy_django_plugin.main"]
+files = ["."]
+exclude = ["^.venv/"]
+
+check_untyped_defs = true
+no_implicit_reexport = true
+warn_unreachable = true
+warn_unused_configs = true
+warn_unused_ignores = true
+warn_redundant_casts = true
+disallow_untyped_defs = true
+
+[tool.django-stubs]
+django_settings_module = "tests.test_settings"

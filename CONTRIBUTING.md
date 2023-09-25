@@ -52,13 +52,14 @@ Here's the suggested workflow for contributing:
 
 ## Coding Style
 
-To maintain a consistent coding style across the project, we use [Ruff](https://beta.ruff.rs/docs/) for code linting and [Black](https://black.readthedocs.io/en/stable/) for code 
-formatting. Before submitting any code changes, please make sure your code 
-adheres to these guidelines.
+To maintain a consistent coding style across the project, we use [Ruff](https://beta.ruff.rs/docs/) for code linting, [Black](https://black.readthedocs.io/en/stable/) for code formatting and
+[mypy](https://mypy-lang.org/) for static type checking. Before submitting any code changes,
+please make sure your code adheres to these guidelines.
 
 All code should be formatted with 
 1. `ruff --fix .`
 2. `black .`
+3. `mypy .`
 
 ## Documentation
 The documentation for this project is located in the `docs` directory and is hosted at
