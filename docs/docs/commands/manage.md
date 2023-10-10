@@ -6,15 +6,15 @@ For example: `python manage.py migrate` or `python manage.py flush`.
 ## Syntax
 
 ```javascript
-cy.manage(command)
-cy.manage(command, options)
+cy.manage(command);
+cy.manage(command, options);
 ```
 
 ## Usage
 
 ```javascript
-cy.manage("migrate")
-cy.manage("flush", ["--no-input"])
+cy.manage("migrate");
+cy.manage("flush", ["--no-input"]);
 ```
 
 ## Arguments
