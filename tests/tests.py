@@ -42,7 +42,7 @@ class ManageViewTestCase(TestCase):
         self.client = Client()
 
     def test_run_manage_command(self) -> None:
-        """Do an HTTP GET request to the ManageView.
+        """Do an HTTP POST request to the ManageView.
 
         First of all, create a dummy user. Then run the
         manage.py flush command through the ManageView.
@@ -60,6 +60,28 @@ class ManageViewTestCase(TestCase):
         expected_count = 0
         actual_count = User.objects.all().count()
         self.assertEqual(expected_count, actual_count)
+
+        expected_status_code = HTTPStatus.OK
+        actual_status_code = response.status_code
+        self.assertEqual(expected_status_code, actual_status_code)
+
+
+class MigrateViewTestCase(TestCase):
+    """Test case for the Migrate view."""
+
+    def setUp(self) -> None:
+        """Set up the test case."""
+        self.client = Client()
+
+    def test_run_migrate_command(self) -> None:
+        """Do an HTTP POST request to the MigrateView.
+
+        Run the manage.py migrate command through the MigrateView.
+        Finally, make sure that the HTTP Status Code of
+        the response is 200.
+        """
+        path = reverse("migrate-view")
+        response = self.client.post(path)
 
         expected_status_code = HTTPStatus.OK
         actual_status_code = response.status_code

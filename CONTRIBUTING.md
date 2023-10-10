@@ -228,6 +228,7 @@ Description for the argument 1
 
 Description for the argument 2
 ```
+7. Install the [example](./example) project and run the `python manage.py cypress_boilerplate` command.
 
 ## Developer Certificate of Origin (DCO)
 

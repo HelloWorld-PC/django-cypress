@@ -20,3 +20,16 @@ Cypress.Commands.add('manage', (command, parameters = []) => {
     });
 })
 
+Cypress.Commands.add('migrate', () => {
+    return cy.csrfToken().then((token) => {
+        return cy.request({
+            method: 'POST',
+            url: '/__cypress__/migrate/',
+            body: {},
+            log: false,
+            headers: {
+                "X-CSRFToken": token["body"]["token"]
+            }
+        });
+    });
+})

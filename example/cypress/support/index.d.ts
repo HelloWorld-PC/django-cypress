@@ -8,7 +8,7 @@ declare namespace Cypress {
          * @example
          * cy.manage()
          */
-        manage(command: string, parameters?: object): Chainable<any>;
+        manage(command: string, parameters?: string[]): Chainable<any>;
         /**
          * Get the CSRF Token.
          *
@@ -16,5 +16,12 @@ declare namespace Cypress {
          * cy.csrfToken()
          */
         csrfToken(): Chainable<any>;
+        /**
+         * Run the python manage.py migrate command
+         *
+         * @example
+         * cy.migrate()
+         */
+        migrate(): Chainable<any>;
     }
 }
