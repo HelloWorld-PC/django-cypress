@@ -5,11 +5,11 @@ Run the `python manage.py flush` command.
 ## Syntax
 
 ```javascript
-cy.refreshDatabase()
+cy.refreshDatabase();
 ```
 
 ## Usage
 
 ```javascript
-cy.refreshDatabase()
+cy.refreshDatabase();
 ```
