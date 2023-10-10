@@ -4,7 +4,7 @@ Cypress.Commands.add('csrfToken', () => {
         url: '/__cypress__/csrftoken/',
         log: false,
     });
-})
+});
 
 Cypress.Commands.add('manage', (command, parameters = []) => {
     return cy.csrfToken().then((token) => {
@@ -18,7 +18,7 @@ Cypress.Commands.add('manage', (command, parameters = []) => {
             }
         });
     });
-})
+});
 
 Cypress.Commands.add('migrate', () => {
     return cy.csrfToken().then((token) => {
@@ -32,4 +32,18 @@ Cypress.Commands.add('migrate', () => {
             }
         });
     });
-})
+});
+
+Cypress.Commands.add('refreshDatabase', () => {
+    return cy.csrfToken().then((token) => {
+        return cy.request({
+            method: 'POST',
+            url: '/__cypress__/refreshDatabase/',
+            body: {},
+            log: false,
+            headers: {
+                "X-CSRFToken": token["body"]["token"]
+            }
+        });
+    });
+});

@@ -1,6 +1,9 @@
 describe('Example Test', () => {
     before(() => {
-        cy.migrate();
+        // either run cy.migrate() or cy.refreshDatabase().
+        // it depends on your case
+        cy.migrate(); 
+        cy.refreshDatabase();
     })
 
     it('shows a homepage', () => {

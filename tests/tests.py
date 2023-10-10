@@ -86,3 +86,29 @@ class MigrateViewTestCase(TestCase):
         expected_status_code = HTTPStatus.OK
         actual_status_code = response.status_code
         self.assertEqual(expected_status_code, actual_status_code)
+
+
+class RefreshDatabaseViewTestCase(TestCase):
+    """Test case for the Migrate view."""
+
+    def test_run_migrate_command(self) -> None:
+        """Do an HTTP POST request to the RefreshDatabaseView.
+
+        First of all, create a new user. Then,
+        run the manage.py flush command through
+        the RefreshDatabaseView. Finally, make sure
+        that the HTTP Status Code of the response
+        is 200 and the database is empty.
+        """
+        User.objects.create(username="Testuser")
+
+        path = reverse("refresh-database-view")
+        response = self.client.post(path)
+
+        expected_status_code = HTTPStatus.OK
+        actual_status_code = response.status_code
+        self.assertEqual(expected_status_code, actual_status_code)
+
+        expected_users_count = 0
+        actual_users_count = User.objects.all().count()
+        self.assertEqual(expected_users_count, actual_users_count)

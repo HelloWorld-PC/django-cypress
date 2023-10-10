@@ -6,6 +6,28 @@ from django.middleware.csrf import get_token
 from django.views import View
 
 
+class RefreshDatabaseView(View):
+    """A view for running Django's flush command via HTTP POST requests."""
+
+    def post(
+        self,
+        _: HttpRequest,
+    ) -> JsonResponse:
+        """Handle HTTP POST requests to execute Django's flush command.
+
+        Args:
+        ----
+        request (HttpRequest): The HTTP request object.
+
+        Returns:
+        -------
+        JsonResponse: A JSON response indicating the success of the command execution.
+        """
+        management.call_command("flush", "--no-input")
+
+        return JsonResponse({"success": True})
+
+
 class MigrateView(View):
     """A view for running Django's migrate command via HTTP POST requests."""
 
