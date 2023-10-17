@@ -1,5 +1,7 @@
 # django-cypress
 
+![Logo](./assets/logo.png)
+
 *Out-of-the-box end-to-end testing for Django*
 
 This package provides the necessary boilerplate to quickly begin
