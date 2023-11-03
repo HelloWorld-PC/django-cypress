@@ -23,5 +23,12 @@ declare namespace Cypress {
          * cy.migrate()
          */
         migrate(): Chainable<any>;
+        /**
+         * Create a new user.
+         *
+         * @example
+         * cy.createUser()
+         */
+        createUser(attributes: object): Chainable<any>;
     }
 }

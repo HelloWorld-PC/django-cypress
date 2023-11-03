@@ -47,3 +47,17 @@ Cypress.Commands.add('refreshDatabase', () => {
         });
     });
 });
+
+Cypress.Commands.add('createUser', (attributes) => {
+    return cy.csrfToken().then((token) => {
+        return cy.request({
+            method: 'POST',
+            url: '/__cypress__/createUser/',
+            body: attributes,
+            log: false,
+            headers: {
+                "X-CSRFToken": token["body"]["token"]
+            }
+        });
+    });
+});

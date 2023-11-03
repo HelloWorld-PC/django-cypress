@@ -4,6 +4,9 @@ describe('Example Test', () => {
         // it depends on your case
         cy.migrate(); 
         cy.refreshDatabase();
+
+        // create a user
+        cy.createUser({username: "django-user", password: "123456789"});
     })
 
     it('shows a homepage', () => {
