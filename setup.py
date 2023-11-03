@@ -10,7 +10,7 @@ with open(path.join(this_directory, "README.md"), encoding="utf-8") as f:
 
 setup(
     name="django-cypress",
-    version="1.0.0",
+    version="1.0.1",
     description="Integration of Cypress in a Django project.",
     long_description=README,
     long_description_content_type="text/markdown",
